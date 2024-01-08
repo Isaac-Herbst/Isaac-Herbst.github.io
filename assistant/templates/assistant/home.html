@@ -1,0 +1,74 @@
+{% extends 'assistant/base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+<!-- <div class="d-flex justify-content-end">
+  <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+          Settings
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" href="#">Dark Mode</a></li>
+          <li><a class="dropdown-item" href="#">Light Mode</a></li>
+          <li><a class="dropdown-item" href="#">Change Text Color</a></li>
+          <li><a class="dropdown-item" href="#">Change Button Color</a></li>
+      </ul>
+  </div>
+</div> -->
+<div class="row justify-content-center my-4">
+    <div class="col-md-7 mt-4">
+        <div class="card">
+            <h1 class="card-header text-center">A.I. CHATBOT</h1>
+            <div class="card-body">
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-primary mb-3" onclick="location.href='{% url 'new_chat' %}'">New Chat +</button>
+              </div>
+              <div class="chat-history mb-3">
+                {% for message in messages %}
+                  <div class="card mb-2 {% if message.role == 'assistant' %}bg-success text-white{% endif %}">
+                    <div class="card-body p-2">
+                      <strong>{{ message.role|title }}:</strong> {{ message.content|linebreaksbr }}
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+              <form action="." method="POST">
+                {% csrf_token %}
+                <input class="form-control mb-2" required type="text" autofocus="autofocus" name="prompt" value="{{ prompt }}" id="">
+                <button class="btn btn-success fw-bold" type="submit">SUBMIT</button>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<style>
+  :root {
+      --text-color: black;
+      --button-color: white;
+      --background-color: white;
+  }
+
+  body {
+      color: var(--text-color);
+      background-color: var(--background-color);
+  }
+
+  .btn {
+      background-color: var(--button-color);
+  }
+</style>
+
+<script>
+  function setColorScheme(scheme) {
+      if (scheme === 'dark') {
+          document.documentElement.style.setProperty('--text-color', 'white');
+          document.documentElement.style.setProperty('--button-color', 'black');
+          document.documentElement.style.setProperty('--background-color', 'black');
+      } else {
+          document.documentElement.style.setProperty('--text-color', 'black');
+          document.documentElement.style.setProperty('--button-color', 'white');
+          document.documentElement.style.setProperty('--background-color', 'white');
+      }
+  }
+</script>

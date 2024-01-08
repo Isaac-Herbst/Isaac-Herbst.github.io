@@ -1,0 +1,20 @@
+{% extends 'assistant/base.html' %}
+{% block title %} About {% endblock %}
+{% block content %}
+
+<div class="row justify-content-center my-4">
+    <div class="col-md-7 mt-4">
+        <div class="card">
+            <h1 class="card-header text-center">About This Chatbot</h1>
+            <div class="card-body">
+                <p>This chatbot uses the GPT-3.5-turbo model by OpenAI to provide responses.</p>
+                <p>Max tokens: 1000</p>
+                <p>The Download Chatlog button downloads the plaintext of the entire page, excluding buttons. </p>
+                <p>The User Profile button stores that light or dark mode option into the client's cookies, and changes the page dynamically.</p>
+                <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
